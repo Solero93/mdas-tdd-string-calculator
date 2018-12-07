@@ -1,15 +1,15 @@
 public class StringCalculator {
-    public int Add(String given) {
-        if (given.equals(""))
+    public int Add(String stringToCalculate) {
+        if (stringToCalculate.equals(""))
             return 0;
 
-        int indexOfComma = given.indexOf(",");
+        String[] stringToCalculateSplitByCommas = stringToCalculate.split(",");
 
-        if (indexOfComma == -1)
-            return Integer.valueOf(given);
+        int sum = 0;
+        for (String numberToSum : stringToCalculateSplitByCommas) {
+            sum += Integer.valueOf(numberToSum);
+        }
 
-        int firstNumber = Integer.valueOf(given.substring(0, indexOfComma));
-        int secondNumber = Integer.valueOf(given.substring(indexOfComma+1));
-        return firstNumber + secondNumber;
+        return sum;
     }
 }
