@@ -15,7 +15,8 @@ public class StringCalculatorTest {
     public static Object[][] stringsToCalculate() {
         return new Object[][]{
                 {"", 0},
-                {"9", 9}
+                {"9", 9},
+                {"2,6", 8}
         };
     }
 
