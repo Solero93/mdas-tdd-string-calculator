@@ -12,7 +12,7 @@ public class StringCalculatorTest {
     }
 
     @DataProvider
-    public static Object[][] stringsToCalculate() {
+    public static Object[][] stringwithNumbersToSum() {
         return new Object[][]{
                 {"", 0},
                 {"9", 9},
@@ -26,9 +26,9 @@ public class StringCalculatorTest {
     }
 
 
-    @Test(dataProvider = "stringsToCalculate")
-    public void Add__StringsToCalculate__ExpectedSum(String stringToCalculate, int expectedSum) {
-        int actualSum = sut.Add(stringToCalculate);
+    @Test(dataProvider = "stringwithNumbersToSum")
+    public void Add__StringsWithNumbersToSum__ExpectedSum(String stringWithNumbersToSum, int expectedSum) {
+        int actualSum = sut.Add(stringWithNumbersToSum);
         Assert.assertEquals(actualSum, expectedSum);
     }
 }

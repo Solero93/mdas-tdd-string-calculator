@@ -1,16 +1,16 @@
 public class StringCalculator {
-    public int Add(String stringToCalculate) {
-        if (stringToCalculate.equals(""))
+    public int Add(String stringWithNumbersToSum) {
+        if (stringWithNumbersToSum.equals(""))
             return 0;
 
-        String stringToCalculateWithoutNewLine = stringToCalculate.replace("\n", ",");
-        String[] stringToCalculateSplitByCommas = stringToCalculateWithoutNewLine.split(",");
+        stringWithNumbersToSum = stringWithNumbersToSum.replace("\n", ",");
+        String[] numbersAsStringToSum = stringWithNumbersToSum.split(",");
 
-        int sumOfNumbersAsString = 0;
-        for (String numberAsStringToSum : stringToCalculateSplitByCommas) {
-            sumOfNumbersAsString += Integer.valueOf(numberAsStringToSum);
+        int sumOfNumbers = 0;
+        for (String numberAsString : numbersAsStringToSum) {
+            sumOfNumbers += Integer.valueOf(numberAsString);
         }
 
-        return sumOfNumbersAsString;
+        return sumOfNumbers;
     }
 }
