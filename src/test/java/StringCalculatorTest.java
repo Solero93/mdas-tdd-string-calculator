@@ -1,5 +1,6 @@
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class StringCalculatorTest {
@@ -10,19 +11,18 @@ public class StringCalculatorTest {
         sut = new StringCalculator();
     }
 
-    @Test
-    public void Add__EmptyString__0() {
-        String given = "";
-        int actual = sut.Add(given);
-        int expected = 0;
-        Assert.assertEquals(actual, expected);
+    @DataProvider
+    public static Object[][] stringsToCalculate() {
+        return new Object[][]{
+                {"", 0},
+                {"9", 9}
+        };
     }
 
-    @Test
-    public void Add__StringWithOneNumber__TheNumberItself() {
-        String given = "9";
-        int actual = sut.Add(given);
-        int expected = 9;
-        Assert.assertEquals(actual, expected);
+
+    @Test(dataProvider = "stringsToCalculate")
+    public void Add__StringsToCalculate__ExpectedSum(String stringToCalculate, int expectedSum) {
+        int actualSum = sut.Add(stringToCalculate);
+        Assert.assertEquals(actualSum, expectedSum);
     }
 }
