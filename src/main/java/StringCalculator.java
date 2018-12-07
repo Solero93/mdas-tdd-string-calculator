@@ -3,7 +3,8 @@ public class StringCalculator {
         if (stringToCalculate.equals(""))
             return 0;
 
-        String[] stringToCalculateSplitByCommas = stringToCalculate.split(",");
+        String stringToCalculateWithoutNewLine = stringToCalculate.replace("\n", ",");
+        String[] stringToCalculateSplitByCommas = stringToCalculateWithoutNewLine.split(",");
 
         int sumOfNumbersAsString = 0;
         for (String numberAsStringToSum : stringToCalculateSplitByCommas) {
