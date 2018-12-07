@@ -5,11 +5,11 @@ public class StringCalculator {
 
         String[] stringToCalculateSplitByCommas = stringToCalculate.split(",");
 
-        int sum = 0;
-        for (String numberToSum : stringToCalculateSplitByCommas) {
-            sum += Integer.valueOf(numberToSum);
+        int sumOfNumbersAsString = 0;
+        for (String numberAsStringToSum : stringToCalculateSplitByCommas) {
+            sumOfNumbersAsString += Integer.valueOf(numberAsStringToSum);
         }
 
-        return sum;
+        return sumOfNumbersAsString;
     }
 }
