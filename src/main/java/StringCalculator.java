@@ -1,29 +1,34 @@
-import java.util.regex.Pattern;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class StringCalculator {
+    private static final String DELIMITER_BEGIN = "//";
+    private static final String DELIMITER_END = "\n";
+    private static final String DEFAULT_DELIMITER = ",";
+
     public int Add(String stringWithNumbersToSum) {
         if (stringWithNumbersToSum.equals(""))
             return 0;
 
-        boolean isDelimiterDefined = stringWithNumbersToSum.startsWith("//");
+        String delimiter = DEFAULT_DELIMITER;
 
-        String delimiter = ",";
+        boolean delimiterIsDefined = stringWithNumbersToSum.startsWith(DELIMITER_BEGIN);
 
-        if (isDelimiterDefined) {
-            stringWithNumbersToSum = stringWithNumbersToSum.replaceFirst("//", "");
-            int indexOfFirstNewLine = stringWithNumbersToSum.indexOf("\n");
+        if (delimiterIsDefined) {
+            stringWithNumbersToSum = stringWithNumbersToSum.replaceFirst(DELIMITER_BEGIN, "");
+            int indexOfFirstNewLine = stringWithNumbersToSum.indexOf(DELIMITER_END);
+
             delimiter = stringWithNumbersToSum.substring(0, indexOfFirstNewLine);
             stringWithNumbersToSum = stringWithNumbersToSum.substring(indexOfFirstNewLine+1);
         }
 
-        stringWithNumbersToSum = stringWithNumbersToSum.replace("\n", delimiter);
-        String[] numbersAsStringToSum = stringWithNumbersToSum.split(Pattern.quote(delimiter));
+        stringWithNumbersToSum = stringWithNumbersToSum.replace("\n", DEFAULT_DELIMITER);
+        stringWithNumbersToSum = stringWithNumbersToSum.replace(delimiter, DEFAULT_DELIMITER);
 
-        int sumOfNumbers = 0;
-        for (String numberAsString : numbersAsStringToSum) {
-            sumOfNumbers += Integer.valueOf(numberAsString);
-        }
+        List<String> splitStringWithNumbers = Arrays.asList(stringWithNumbersToSum.split(DEFAULT_DELIMITER));
+        List<Integer> numbersToAdd = splitStringWithNumbers.stream().map(Integer::valueOf).collect(Collectors.toList());
 
-        return sumOfNumbers;
+        return numbersToAdd.stream().reduce(0, Integer::sum);
     }
 }
