@@ -27,8 +27,17 @@ public class StringCalculator {
         stringWithNumbersToSum = stringWithNumbersToSum.replace(delimiter, DEFAULT_DELIMITER);
 
         List<String> splitStringWithNumbers = Arrays.asList(stringWithNumbersToSum.split(DEFAULT_DELIMITER));
-        List<Integer> numbersToAdd = splitStringWithNumbers.stream().map(Integer::valueOf).collect(Collectors.toList());
+        List<Integer> numbersToAdd = splitStringWithNumbers.stream().map(this::valueOfIfPositiveThrowExceptionIfNegative).collect(Collectors.toList());
 
         return numbersToAdd.stream().reduce(0, Integer::sum);
+    }
+
+    public int valueOfIfPositiveThrowExceptionIfNegative(String numberToConvert) throws ArithmeticException{
+        int convertedNumber = Integer.valueOf(numberToConvert);
+        if (convertedNumber < 0) {
+            throw new ArithmeticException();
+        } else {
+            return convertedNumber;
+        }
     }
 }

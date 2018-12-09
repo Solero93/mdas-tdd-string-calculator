@@ -33,4 +33,9 @@ public class StringCalculatorTest {
         int actualSum = sut.Add(stringWithNumbersToSum);
         Assert.assertEquals(actualSum, expectedSum);
     }
+
+    @Test(expectedExceptions = ArithmeticException.class)
+    public void Add__NegativeInput__ThrowsException() {
+        int actualSum = sut.Add("2,-1");
+    }
 }
